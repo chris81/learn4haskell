@@ -629,8 +629,8 @@ Implement a function that duplicates each element of the list
 
 -}
 duplicate :: [a] -> [a]
-duplicate = error "duplicate: Not implemented!"
-
+duplicate [] = []
+duplicate (x:xs) = [x,x] ++ duplicate xs
 
 {- |
 =⚔️= Task 7
@@ -644,7 +644,11 @@ Write a function that takes elements of a list only on even positions.
 >>> takeEven [2, 1, 3, 5, 4]
 [2,3,4]
 -}
-takeEven = error "takeEven: Not implemented!"
+takeEven :: [a] -> [a]
+takeEven l = go 0 l
+    where go _ [] = []
+          go 0 (x:xs) = x : go 1 xs
+          go 1 (_:xs) = go 0 xs
 
 {- |
 =🛡= Higher-order functions
@@ -751,7 +755,9 @@ value of the element itself
 🕯 HINT: Use combination of 'map' and 'replicate'
 -}
 smartReplicate :: [Int] -> [Int]
-smartReplicate l = error "smartReplicate: Not implemented!"
+smartReplicate l =
+    let replicated = map (\x -> replicate x x) l
+    in concat replicated
 
 {- |
 =⚔️= Task 9
