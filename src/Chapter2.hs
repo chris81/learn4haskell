@@ -873,8 +873,10 @@ list.
 
 🕯 HINT: Use the 'cycle' function
 -}
-rotate = error "rotate: Not implemented!"
-
+rotate :: Int -> [a] -> [a]
+rotate n l =
+    let len = length l
+    in take len (drop n (cycle l))
 {- |
 =💣= Task 12*
 
@@ -889,8 +891,9 @@ and reverses it.
   function, but in this task, you need to implement it manually. No
   cheating!
 -}
-rewind = error "rewind: Not Implemented!"
-
+rewind :: [a] -> [a]
+rewind [] = []
+rewind (x:xs) = rewind xs ++ [x]
 
 {-
 You did it! Now it is time to the open pull request with your changes
