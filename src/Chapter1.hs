@@ -563,9 +563,7 @@ mid x y z
     | z <= x && x <= y = x
     | x <= y && y <= z = y
     | z <= y && y <= x = y
-    | x <= z && z <= y = z
-    | y <= z && z <= x = z
-    | otherwise = x -- Only matches when x = y = z used to silence warning
+    | otherwise = z -- Only matches when x = y = z used to silence warning
 
 
 {- |
