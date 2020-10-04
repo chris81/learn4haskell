@@ -874,9 +874,10 @@ list.
 🕯 HINT: Use the 'cycle' function
 -}
 rotate :: Int -> [a] -> [a]
-rotate n l =
-    let len = length l
-    in take len (drop n (cycle l))
+rotate n l
+    | n < 0 = []
+    | otherwise = let len = length l
+                  in take len (drop n (cycle l))
 {- |
 =💣= Task 12*
 
