@@ -630,7 +630,7 @@ Implement a function that duplicates each element of the list
 -}
 duplicate :: [a] -> [a]
 duplicate [] = []
-duplicate (x:xs) = [x,x] ++ duplicate xs
+duplicate (x:xs) = x : x: duplicate xs
 
 {- |
 =⚔️= Task 7
@@ -755,9 +755,7 @@ value of the element itself
 🕯 HINT: Use combination of 'map' and 'replicate'
 -}
 smartReplicate :: [Int] -> [Int]
-smartReplicate l =
-    let replicated = map (\x -> replicate x x) l
-    in concat replicated
+smartReplicate = concatMap (\x -> replicate x x)
 
 {- |
 =⚔️= Task 9
@@ -771,7 +769,7 @@ the list with only those lists that contain a passed element.
 🕯 HINT: Use the 'elem' function to check whether an element belongs to a list
 -}
 contains :: Int -> [[Int]] -> [[Int]]
-contains x l = filter (elem x) l
+contains x = filter (elem x)
     
 {- |
 =🛡= Eta-reduction
@@ -874,6 +872,7 @@ list.
 🕯 HINT: Use the 'cycle' function
 -}
 rotate :: Int -> [a] -> [a]
+rotate _ [] = []
 rotate n l
     | n < 0 = []
     | otherwise = let len = length l
@@ -894,8 +893,9 @@ and reverses it.
 -}
 rewind :: [a] -> [a]
 rewind [] = []
-rewind (x:xs) = rewind xs ++ [x]
-
+rewind xs = go [] xs
+    where go acc [] = acc
+          go acc (x:xs) = go (x : acc) xs
 {-
 You did it! Now it is time to the open pull request with your changes
 and summon @vrom911 and @chshersh for the review!
